@@ -1,0 +1,143 @@
+%%% template.tex
+%%%
+%%% This LaTeX source document can be used as the basis for your technical
+%%% paper or abstract.
+%%%
+%%% This example is tailored toward the two-page abstract. Please see "template.tex"
+%%% for a more fully-annotated example.
+
+\documentclass{egpubl}
+\usepackage{egsgp16}
+
+% --- for  Annual CONFERENCE
+% \ConferenceSubmission % uncomment for Conference submission
+% \ConferencePaper      % uncomment for (final) Conference Paper
+% \STAR                 % uncomment for STAR contribution
+% \Tutorial             % uncomment for Tutorial contribution
+% \ShortPresentation    % uncomment for (final) Short Conference Presentation
+%
+% --- for  CGF Journal
+% \JournalSubmission    % uncomment for submission to Computer Graphics Forum
+% \JournalPaper         % uncomment for final version of Journal Paper
+%
+% --- for  CGF Journal: special issue
+\SpecialIssueSubmission    % uncomment for submission to Computer Graphics Forum, special issue
+% \SpecialIssuePaper         % uncomment for final version of Journal Paper, special issue
+%
+% --- for  EG Workshop Proceedings
+% \WsSubmission    % uncomment for submission to EG Workshop
+% \WsPaper         % uncomment for final version of EG Workshop contribution
+%
+ \electronicVersion % can be used both for the printed and electronic version
+
+% !! *please* don't change anything above
+% !! unless you REALLY know what you are doing
+% ------------------------------------------------------------------------
+
+% for including postscript figures
+% mind: package option 'draft' will replace PS figure by a filname within a frame
+\ifpdf \usepackage[pdftex]{graphicx} \pdfcompresslevel=9
+\else \usepackage[dvips]{graphicx} \fi
+
+\PrintedOrElectronic
+
+% prepare for electronic version of your document
+\usepackage{t1enc,dfadobe}
+
+\usepackage{egweblnk}
+\usepackage{cite}
+\usepackage{mathrsfs}
+\usepackage{subfigure}
+%\usepackage[ruled,lined,linesnumbered]{algorithm2e}
+\usepackage{diagbox}
+\usepackage{xspace}
+\usepackage[english]{babel}
+\usepackage{enumitem}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{subfigure}
+
+\def\ProjName{CustomCut}
+\def\RCKNNG{\mbox{RC-$k$NNG}}
+\def\sid#1{\textcolor{red}{(\textsc{Sid says: }\textsf{#1})}}
+\def\xiaogang#1{\textcolor{blue}{(\textsc{Xiaogang says: }\textsf{#1})}}
+\def\xuekun#1{\textcolor{green}{(\textsc{Xuekun says: }\textsf{#1})}}
+\def\kevin#1{\textcolor{magenta}{(\textsc{Kevin says: }\textsf{#1})}}
+\def\juncong#1{\textcolor{orange}{(\textsc{Juncong says: }\textsf{#1})}}
+
+%%% Title of your article or abstract.
+\title{\ProjName: On-demand Extraction of Customized 3D Parts\\~with 2D Sketches}
+
+% for anonymous conference submission please enter your SUBMISSION ID
+% instead of the author's name (and leave the affiliation blank) !!
+\author[paper1050]{Submission ID: paper1050}
+
+\begin{document}
+
+%%% This is the ``teaser'' command, which puts an figure, centered, below
+%%% the title and author information, and above the body of the content.
+
+%\teaser{
+%\includegraphics[width=1.0\linewidth]{./Material/Head.pdf}
+%\caption{Given a conceptual design (a), our method is used to easily create a detailed creative shape (j) following the designer's intent. The user draws 2D sketches interpreted as 3D proxies (b, d, f, h), which are used to generate customized candidate parts on-the-fly from a shape database. Shapes produced by our method can be composed of irregular parts (see the head part in (c) and the lamp part in (e)) and parts of shapes from different categories (e.g. dog in (c), lamp in (e), and octopus in (g)).}\label{fig:HeadPic}}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+Several applications in shape modeling and exploration require identification and extraction of a 3D shape part matching a 2D sketch. We present {\ProjName}, an on-demand part extraction algorithm. Given a sketched query, {\ProjName} automatically retrieves partially matching shapes from a database, identifies the region optimally matching the query in each shape, and extracts this region to produce a customized part that can be used in various modeling applications. In contrast to earlier work on sketch-based retrieval of predefined parts, our approach can extract arbitrary parts from input shapes and does not rely on a prior segmentation into semantic components. The method is based on a novel data structure for fast retrieval of partial matches: the randomized compound $k$-NN graph built on multi-view shape projections. We also employ a coarse-to-fine strategy to progressively refine part boundaries down to the level of individual faces. Experimental results indicate that our approach provides an intuitive and easy means to extract customized parts from a shape database, and significantly expands the design space for the user. We demonstrate several applications of our method to shape design and exploration.
+\end{abstract}
+
+%
+% The code below should be generated by the tool at
+% http://dl.acm.org/ccs.cfm
+% Please copy and paste the code instead of the example below.
+%
+%\begin{CCSXML}
+%<ccs2012>
+%<concept>
+%<concept_id>10010147.10010371.10010382</concept_id>
+%<concept_desc>Computing methodologies~Image manipulation</concept_desc>
+%<concept_significance>500</concept_significance>
+%</concept>
+%<concept>
+%<concept_id>10010147.10010371.10010382.10010236</concept_id>
+%<concept_desc>Computing methodologies~Computational photography</concept_desc>
+%<concept_significance>300</concept_significance>
+%</concept>
+%</ccs2012>
+%\end{CCSXML}
+%\ccsdesc[500]{Computing methodologies~Image manipulation}
+%\ccsdesc[300]{Computing methodologies~Computational photography}
+%
+% End generated code
+%
+% The next three commands are required, and insert the user-generated keywords,
+% The CCS concepts list, and the rights management text.
+% Please make sure there is a blank line between each of these three commands.
+%\keywordlist
+%\conceptlist
+%\printcopyright
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{./Content/intro}
+\input{./Content/related}
+\input{./Content/overview}
+\input{./Content/acceleration}
+\input{./Content/suggestion}
+\input{./Content/extraction}
+\input{./Content/apps}
+\input{./Content/results}
+\input{./Content/conclusion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section*{Acknowledgements}
+%Special thanks to Yutong Wang for the implementation of the 3D proxy construction. We also thank Kuan Wang, Tian Qiu, Wanxuan Sun, Yue Huang and Qianqian Ye for preparing the results; the reviewers for the constructive comments; Siwang Li, Xuan Cheng and Debing Zhang for suggestions on the suggestive contours matching algorithm. This research is is supported in part by grants from \ldots
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{eg-alpha}
+%\nocite{*}
+\bibliography{Bib}
+\end{document}

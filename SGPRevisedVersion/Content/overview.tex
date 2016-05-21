@@ -1,0 +1,14 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Overview}
+
+The pipeline of our algorithm is illustrated in Figure \ref{fig:pipeline}. It consists of two phases: an \emph{offline phase} and \st{a} \hl{an} \emph{online phase}. In the offline phase, we construct acceleration structures critical for interactive on-demand part customization. In the online phase, we extract parts in response to user sketches.
+
+\paragraph*{Offline Phase.}
+First, we extract {\em boundary contours}~\cite{suggestivecontoursrusinkiewicztog2003} for each model in the database from different camera views. Then, we extract descriptors for the boundary contours at different scales (Section \ref{subsec:CtourDesc}).
+
+Next, we organize all boundary contours of all models into a compound $k$-nearest neighbors graph, for fast retrieval (Section \ref{sec:acc}).
+
+Finally, we construct a compact representation of each database shape: the super-face graph (Section \ref{subsec:sfg}). A super-face \hl{(analogous to superpixel}~\cite{RenLCM2003}\hl{)} is a group of adjacent, similar faces: factoring a shape into its super-faces yields a lower-complexity representation of the raw mesh. We use the super-face graph to quickly extract the part corresponding to a matched query contour.
+
+\paragraph*{Online Phase.}
+The input sketch is used to retrieve partially matching shapes (via the $k$-NN graph) and identify their regions matching the sketch (via the super-face graph). The boundary of each such region is optimized by a coarse-to-fine segmentation strategy: a rough boundary is first computed at the super-face level and then refined at the raw face level. In contrast to other methods \cite{surveyonmeshsegmentationshamircgf2008}, our segmentation method takes contour perception, concavity, and smoothness into consideration (Section \ref{sec:partrefinement}).
