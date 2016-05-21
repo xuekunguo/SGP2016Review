@@ -1,0 +1,33 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Candidate Shape Retrieval}\label{sec:candshape}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this section, we describe how the {\RCKNNG} is used to quickly and accurately retrieve candidate parts that match the sketch, from an unsegmented database.
+
+\subsection{Contour Descriptor}\label{subsec:CtourDesc}
+Each contour is divided into sections. The query contour, which is the sketch, has a single section. Database shape contours have several sections at each scale (Section \ref{sec:acc}), each of which may resemble the query to yield a partial match.
+
+To compare two contour sections, we generate contour descriptors. The particular descriptor we employ is a matrix of angles~\cite{partialedgecontourriemeneccv2010}. The descriptor is calculated from the relative spatial orientations of lines connecting sampled points on the contour.
+
+A section of a contour has \st{$m = 20$} \hl{$m = 21$} sampled points on it. For each pair of points $(b_i, b_j)$, we compute an angle metric $\alpha_{ij}$:
+\[{\alpha _{ij}} = \left\{ {\begin{array}{*{20}{c}}
+   {\left\langle {\overline {{b_i}{b_j}} ,\overline {{b_i}{b_{i + \Delta }}} } \right\rangle } & {\text{if~} i < j,}  \\
+   {\left\langle {\overline {{b_i}{b_j}} ,\overline {{b_i}{b_{i - \Delta }}} } \right\rangle } & {\text{if~} i > j,}  \\
+   0 & {\text{if~} \left\| {i - j} \right\| \le \Delta }  \\
+\end{array}} \right.\]
+where $\Delta = 2$ is an offset parameter and $\langle \ell_1, \ell_2 \rangle$ denotes the angle between lines $\ell_1$ and $\ell_2$. The contour descriptor is then the angle matrix $A$, where $A_{ij} = \alpha_{ij}$. The distance between two contour sections $S$ and $T$ is the squared Euclidean distance between their angle matrices $A^S$ and $A^T$:
+\[
+D(S, T) = \frac{1}{m^2} \sum_{i = 1}^m \sum_{j = 1}^m \left( A^S_{ij} - A^T_{ij} \right)^2
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Shape Retrieval}
+We need to identify $c$ partially matching shapes from which candidate parts will be presented to the user (our experiments use $c = 9$). To achieve this, we query the ${\RCKNNG}$ for a larger number ($21c$) of matching contour sections, and compute a score for each parent shape. The $c$ shapes with highest scores are presented in the interface.
+
+To generate the pool of contour sections, we first compare the query contour to all seed sections in the ${\RCKNNG}$. The results are sorted in a priority queue according to increasing descriptor distance, allowing us to traverse the graph in a best-first manner. The current best matching section is at the top of the queue. When it is popped off, its neighbors are compared to the query and added to the queue if they are not already there. We continue until we have popped and stored $21c$ matching sections.
+
+A shape with at least one section in the matched pool is assigned the following score, which is used to rank the shapes for selecting the final candidates:
+\[
+s = \frac{\alpha }{t}\sum\limits_{i = 1}^t {{D_i}}  + \frac{\beta }{t},
+\]
+where $t$ is the number of matched sections in the shape contour, and $D_i$ is the distance of the $i^{\textrm{th}}$ matched section's descriptor from the query. We empirically set $\alpha = 0.95$, $\beta = 0.05$.

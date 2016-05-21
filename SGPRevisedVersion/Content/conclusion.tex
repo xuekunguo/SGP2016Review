@@ -6,10 +6,12 @@ We have introduced a sketch-based customized part extraction algorithm for 3D sh
 
 \textbf{Limitations.}  In our current implementation, we assume that the models in the database are manifold. Also, the contour descriptor we adopt is not scale-invariant.
 
-\textbf{Future work.} We plan to develop more powerful scale-invariant contour descriptors. Since there have been several improvements to the angle descriptor~\cite{frompartialshapematchingcvpr}, we would like to incorporate these more powerful descriptors in our framework. In addition, it would be nice to incorporate cues from surrounding context to help disambiguate sketches. The view under which the sketch is drawn is important: some views are more discriminative than others. Helping users to draw optimal views and/or helping them interactively resolve ambiguous sketches, is an important research direction.
-\hl{To give a recognized definition of the partial matching problem is interesting. }
+\textbf{Future work.} We plan to develop more powerful scale-invariant contour descriptors. Since there have been several improvements to the angle descriptor~\cite{frompartialshapematchingcvpr}, we would like to incorporate these more powerful descriptors in our framework. In addition, it would be nice to incorporate cues from surrounding context to help disambiguate sketches.
+\hl{Local symmetry/similarity matching could benefit from the context-based search.}
+The view under which the sketch is drawn is important: some views are more discriminative than others. Helping users to draw optimal views and/or helping them interactively resolve ambiguous sketches, is an important research direction.
+\hl{We plan to investigate the recognized definition of the partial matching problem in the future. }
 \hl{It is also of interest to test our method in a more larger database. }
-\hl{The fundamental premise of the sketch-based shape retrieval approaches is that the example database becomes larger by implicitly containing all possible segmented parts. We plan to evaluate the fundamental premise in the future. }
-\hl{The pose of the partial shape used for computing the boundary contours is important for our method. 
-If a suboptimal view is chosen, the method can return inappropriate candidate parts. 
-It would be interesting to explore the problem of best view selection in the future. }
+\hl{The fundamental premise of the sketch-based shape retrieval approaches is that the example database becomes larger by implicitly containing all possible segmented parts. We plan to investigate it in the future. }
+\hl{The pose of the partial shape used for computing the boundary contours is important for our method.
+If a suboptimal view is chosen, the method can return inappropriate candidate parts.
+It would be interesting to explore the problem of best view selection in the future. } 
