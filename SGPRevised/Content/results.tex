@@ -44,12 +44,12 @@ BF {\RCKNNG} represents the {\RCKNNG} with the brute force method.
 Wang {\RCKNNG} represents the {\RCKNNG} with Wang's method.}\label{tab:RCKNNGComp}
 \end{table}
 %--------------------------
-\begin{figure} \centering
+\begin{figure*} \centering
 \includegraphics[width=1.0\linewidth]{./Material/RCKNNGComp.pdf}
 \caption{Retrieved parts generated with different methods: the brute force $k$NNG method (a), the Wang's randomized $k$NNG approximation method (b),
 the {\RCKNNG} with the brute force method (c), and the {\RCKNNG} with Wang's method (d).}
 \label{fig:RCKNNGComp}
-\end{figure}
+\end{figure*}
 %--------------------------
 \begin{figure}\centering
 \subfigure[Different retrieval methods]{\includegraphics[width=0.49\linewidth]{./Material/PreRecDifAlg.pdf}}
@@ -102,4 +102,4 @@ In Figure \ref{fig:SFCountsPartQuality}, we show the qualitative improvement in 
 \caption{Retrieval results generate with our method and the pre-segmentation method. Given the user's sketch, we show the retrieval results generated with the two methods. In (b) and (d), results generated with the pre-segmentation method are on the upper row; results generated with our method are on the lower row. The pre-segmentation method retrieves the predefined parts (the head of the camel model in (b) and the leg of the cow model in (d)), which is similar to the user's sketch. While our method extracts parts (the ``head+leg'' part of the camel model in (b) and the lower leg of the cow model in (d)) on-the-fly according to the user's sketch.}\label{fig:Comp2PreSeg}
 \end{figure}
 
-\paragraph*{Camera view settings.} \hl{We evaluate the influence of the different camera view settings under which we extract contours for the database models. Figure }\ref{fig:PreRecCurve}\hl{(b) shows the precision recall curve generated with different camera view settings. The 7 views include 3 canonical side views and 4 corner views. The 21 views include 3 canonical side views, 4 corner views, and 14 uniformly sampled views}~\cite{FanWang2013}\hl{. The 49 views include 3 canonical side views, 4 corner views, and 42 uniformly sampled views. The 112 views include 3 canonical side views, 4 corner views, and 105 uniformly sampled views. To balance between efficiency and effectiveness, we use 21 views for all the experiments and applications.}s
+\paragraph*{Camera view settings.} \hl{We evaluate the influence of the different camera view settings under which we extract contours for the database models. Figure }\ref{fig:PreRecCurve}\hl{(b) shows the precision recall curve generated with different camera view settings. The 7 views include 3 canonical side views and 4 corner views. The 21 views include 3 canonical side views, 4 corner views, and 14 uniformly sampled views}~\cite{FanWang2013}\hl{. The 49 views include 3 canonical side views, 4 corner views, and 42 uniformly sampled views. The 112 views include 3 canonical side views, 4 corner views, and 105 uniformly sampled views. To balance between efficiency and effectiveness, we use 21 views for all the experiments and applications.}s 
